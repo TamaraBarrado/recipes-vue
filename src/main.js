@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import HomeScreen from './screens/HomeScreen.vue';
-import DetailScreen from './screens/DetailScreen.vue';
+import DetailScreen from './components/DetailScreen.vue';
 import CreateRecipe from './screens/CreateRecipe.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 

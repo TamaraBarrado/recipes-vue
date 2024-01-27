@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     recipeImage() {
-      return `../imagenes/${this.item.image}`;
+      return require(`@/imagenes/${this.item.image}`);
     }
   },
   methods: {
@@ -61,6 +61,7 @@ export default {
 
 .receta {
   position: relative;
+  cursor: pointer; 
 }
 
 .receta:hover img {

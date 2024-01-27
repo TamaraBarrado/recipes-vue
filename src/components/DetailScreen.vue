@@ -3,41 +3,19 @@
         <div class="card">
             <div class="row g-4">
                 <div class="col-md-8">
-                    <div id="carouselExampleIndicators" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-auto">
+                            <img :src="recipeImage" class="img-fluid">
                         </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" style="max-height: 500px;">
-                                <img src="../imagenes/arroz/Recetaprincipal.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" style="max-height: 500px;">
-                                <img src="../imagenes/arroz/Recetaprincipal1.jpeg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" style="max-height: 500px;">
-                                <img src="../imagenes/arroz/Recetaprincipal2.jpg" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
+                    <!-- <div class="carousel-inner">
+                        <div class="carousel-item active" style="max-height: 500px;">
+                            <img :src="recipeImage" class="d-block w-100" alt="...">
+                        </div>
+                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <div class="card-body">
-
                         <!-- ingredients -->
                         <h4 class="card-title text-center">INGREDIENTES</h4>
                         <h6>
@@ -82,16 +60,13 @@
                     <div v-if="index % 2 == 0">
                         <div class="row g-0">
                             <div class="col-md-5">
-                                <img src="../imagenes/arroz/arroz-pollo-ingredientes.jpg" class="img-fluid rounded-start"
-                                    alt="paso0">
+                                <img :src="require(`@/steps/${step.id_step}.jpg`)" class="img-fluid rounded-start">
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h3 class="card-title text-center">{{ step.name }}</h3><br>
                                     <h5>
-                                        <p class="card-text" v-for="(instruction, index) in step.instructions" :key="index">
-                                            - {{ instruction.instruction }}
-                                        </p>
+                                        <p class="card-text">{{ step.instructions }}</p>
                                     </h5>
                                 </div>
                             </div>
@@ -103,15 +78,12 @@
                                 <div class="card-body">
                                     <h3 class="card-title text-center">{{ step.name }}</h3><br>
                                     <h5>
-                                        <p class="card-text" v-for="(instruction, index) in step.instructions" :key="index">
-                                            - {{ instruction.instruction }}
-                                        </p>
+                                        <p class="card-text">{{ step.instructions }}</p>
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img src="../imagenes/arroz/arroz-pollo-ingredientes.jpg" class="img-fluid rounded-start"
-                                    alt="paso0">
+                                <img :src="require(`@/steps/${step.id_step}.jpg`)" class="img-fluid rounded-start">
                             </div>
                         </div>
                     </div>
@@ -138,10 +110,19 @@ export default {
             recipe: {}
         };
     },
+    computed: {
+        recipeImage() {
+            if (this.recipe.image != undefined)
+                return require(`@/imagenes/${this.recipe.image}`);
+            else
+                return ""
+        }
+    },
     mounted() {
         let recipeId = this.$route.params.id;
         axios.get(`http://localhost:3005/recipes/${recipeId}`)
             .then(response => {
+                console.log('Prueba receta:', response.data);
                 this.recipe = response.data;
             })
             .catch(error => {
