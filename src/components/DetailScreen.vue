@@ -1,26 +1,24 @@
 <template>
     <div class="container-fluid bg-dark py-2 text-center" style="color: white;">
         <div class="card">
-            <div class="row g-4">
-                <div class="col-md-8">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-auto">
-                            <img :src="recipeImage" class="img-fluid">
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-7 col-md-8 col-lg-8" style="max-height: 500px;">
+                    <!-- <div class="row justify-content-center align-items-center"> -->                       
+                            <img :src="recipeImage" class="center-cropped-image img-fluid" style="max-height: 500px;">               
                     <!-- <div class="carousel-inner">
                         <div class="carousel-item active" style="max-height: 500px;">
-                            <img :src="recipeImage" class="d-block w-100" alt="...">
+                            <img :src="recipeImage" class alt="...">
                         </div>
                     </div> -->
                 </div>
-                <div class="col-md-4">
-                    <div class="card-body">
+                <div class="col-5 col-md-4 col-lg-4">
+                    <div class="card-body" style="font-family: 'Merienda', cursive;">
                         <!-- ingredients -->
                         <h4 class="card-title text-center">INGREDIENTES</h4>
                         <h6>
                             <ul class="list-group" style="text-align: left;">
-                                <li class="list-group" v-for="(ingredient, index) in recipe.ingredients" :key="index">-{{
+                                <li class="list-gr
+                                oup" v-for="(ingredient, index) in recipe.ingredients" :key="index">-{{
                                     ingredient.ingredient }}</li>
                             </ul>
                         </h6><br>
@@ -54,11 +52,11 @@
 
 
     <div class="container-fluid bg-dark py-4 text-center">
-        <div class="row">
+        <div class="row" style="font-family: 'Merienda', cursive;" >
             <div class="container mt-3" v-for="(step, index) in recipe.steps" :key="index">
                 <div class="card mb-3 border-2">
                     <div v-if="index % 2 == 0">
-                        <div class="row g-0">
+                        <div class="row">
                             <div class="col-md-5">
                                 <img :src="require(`@/steps/${step.id_step}.jpg`)" class="img-fluid rounded-start">
                             </div>
@@ -73,7 +71,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="row g-0">
+                        <div class="row" >
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h3 class="card-title text-center">{{ step.name }}</h3><br>
@@ -83,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img :src="require(`@/steps/${step.id_step}.jpg`)" class="img-fluid rounded-start">
+                                <img :src="require(`@/steps/${step.id_step}.jpg`)" class="img-fluid rounded-start" >
                             </div>
                         </div>
                     </div>
@@ -136,6 +134,12 @@ export default {
 
 
 <style>
+.center-cropped-image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
 section {
     display: flex;
     flex-direction: column;
