@@ -18,7 +18,7 @@
                         <h6>
                             <ul class="list-group" style="text-align: left;">
                                 <li class="list-gr
-                                oup" v-for="(ingredient, index) in recipe.ingredients" :key="index">-{{
+                                oup" v-for="(ingredient, index) in recipe.ingredients" :key="index">{{
                                     ingredient.ingredient }}</li>
                             </ul>
                         </h6><br>
